@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">FCMCHECK</string>
+    <string name="action_settings">Settings</string>
+    <string name="action_check_environment">Check Env</string>
+    <!--FCM-->
+    <string name="fcm_message">FCM Message</string>
+    <string name="default_notification_channel_name" translatable="true">fcm-check</string>
+    <string name="default_notification_channel_id" translatable="false">fcm_default_channel</string>
+
+</resources>
