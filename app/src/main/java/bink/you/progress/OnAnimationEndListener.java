@@ -1,4 +1,4 @@
-package com.dd;
+package bink.you.progress;
 
 interface OnAnimationEndListener {
 

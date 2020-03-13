@@ -99,7 +99,7 @@ public class VolleyRequestTools {
   }
 }
      */
-    public static void pushFCM(final Context context,String fcmToken){
+    public static void pushFCM(final Context context,String fcmToken,final RequestListener requestListener){
         if (TextUtils.isEmpty(fcmToken)){
             fcmToken = "c9rJJW_VEBM:APA91bE_mCMKjeDmmy5vTpqBgoIDxu-s6vgG540-c0r3dnu1q7sE-awUkkahymfP8875t2ktH_X58Dqn9qjcbo74d_ORHGJS3MeljMZZQF9h2Wz4tcF6IQlDw4Jclj9FWAhTf5CKesIT";
         }
@@ -129,22 +129,27 @@ public class VolleyRequestTools {
         MyJsonObjectRequest jsonObjectRequest = new MyJsonObjectRequest(Request.Method.POST, url, params, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
-                int result = -1;
-                int message = -1;
+                Log.e("Akuvox",response.toString());
+                int success = -1;
+                int failure = -1;
                 try {
-                    result = response.getInt("success");
-                    message = response.getInt("failure");
+                    success = response.getInt("success");
+                    failure = response.getInt("failure");
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
-                Toast.makeText(context, "post fcm token result: " + result + ";message: " + message, Toast.LENGTH_SHORT).show();
+                if (success == 1){
+                    requestListener.onSuccess(response.toString());
+                }
+                Toast.makeText(context, "send fcm message success: " + success + ";failure: " + failure, Toast.LENGTH_SHORT).show();
 
             }
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
 
-                Log.e("AkuvoxText", "open door err: " + error.toString());
+                Log.e("AkuvoxText", "send fcm message result: " + error.toString());
+                requestListener.onFailed(error.toString());
             }
         }).setAuthorization(Constants.SERVER_KEY);
         requestQueue.add(jsonObjectRequest);

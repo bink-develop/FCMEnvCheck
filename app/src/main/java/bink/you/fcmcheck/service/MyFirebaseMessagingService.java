@@ -63,7 +63,11 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
 
         // TODO(developer): Handle FCM messages here.
         // Not getting messages here? See why this may be: https://goo.gl/39bRNJ
-        Log.e("fcm","onMessageReceived:receive firebase message");
+        long currentTime = System.currentTimeMillis();
+        long sendTime = remoteMessage.getSentTime();
+        int priority = remoteMessage.getPriority();
+        int originalPriority = remoteMessage.getOriginalPriority();
+        Log.e("fcm","onMessageReceived:receive firebase message sendTime:"+sendTime+" ;currentTime:"+currentTime+";originalPriority:"+originalPriority+";priority:"+priority);
         mRemoteMessage = remoteMessage;
         wakeUpScreen();
         sendNotification("Fcm-test","you receive an notification");

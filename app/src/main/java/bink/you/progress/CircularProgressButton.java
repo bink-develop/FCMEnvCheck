@@ -1,6 +1,4 @@
-package com.dd;
-
-import com.dd.circular.progress.button.R;
+package bink.you.progress;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -17,7 +15,10 @@ import android.util.AttributeSet;
 import android.util.StateSet;
 import android.widget.Button;
 
-public class CircularProgressButton extends Button {
+import androidx.appcompat.widget.AppCompatButton;
+import bink.you.fcmcheck.R;
+
+public class CircularProgressButton extends AppCompatButton {
 
     public static final int IDLE_STATE_PROGRESS = 0;
     public static final int ERROR_STATE_PROGRESS = -1;
